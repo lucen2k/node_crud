@@ -20,7 +20,8 @@ mongodb.MongoClient.connect("mongodb://localhost:27017/test", function(err, data
 
 // 一覧取得
 app.get("/api/users", function(req, res){
-  users.find().toArray(function(err, items){
+  // 削除フラグを確認する
+  users.find({del_flg: 0}).toArray(function(err, items){
     res.send(items);
   });
 });
@@ -34,8 +35,15 @@ app.get("/api/users/:_id", function(req, res){
 
 // 追加・更新
 app.post("/api/users", function(req, res){
-  var user = req.body;
+  var user = {};
+  user = req.body;
   if (user._id) user._id = mongodb.ObjectID(user._id);
+  // 削除フラグ追加
+  user.del_flg = 0;
+  
+  console.log("user--------------------");
+  console.log(user);
+  
   users.save(user, function(){
     res.send("insert or update");
   });
@@ -43,7 +51,11 @@ app.post("/api/users", function(req, res){
 
 // 削除
 app.delete("/api/users/:_id", function(req, res){
-  users.remove({_id: mongodb.ObjectID(req.params._id)}, function(){
-    res.send("delete");
+  // 削除フラグUpdate
+  users.findOne({_id: mongodb.ObjectID(req.params._id)}, function(err, item){
+    item.del_flg = 1;
+    users.save(item, function(){
+      res.send("delete");
+    });
   });
 });
