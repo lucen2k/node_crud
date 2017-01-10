@@ -17,6 +17,7 @@ app.factory('User', function($resource) {
 });
 
 app.controller('ListCtrl', function($scope, $route, User) {
+  console.log("ListCtrl---------------");
   $scope.users = User.query();
   $scope.delete = function(_id) {
     User.delete({_id: _id}, function() {
@@ -26,6 +27,7 @@ app.controller('ListCtrl', function($scope, $route, User) {
 });
 
 app.controller('EditCtrl', function($scope, $routeParams, $location, User) {
+  console.log("EditCtrl---------------");
   if ($routeParams._id != 'new') $scope.user = User.get({_id: $routeParams._id});
   $scope.edit = function() {
     User.save($scope.user, function() {
