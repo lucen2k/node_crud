@@ -33,13 +33,13 @@ app.controller('ListCtrl', function($scope, $route, User) {
   };
 });
 
-app.controller('DropsCtrl', function($scope, $route, Drops) {
+app.controller('DropsCtrl', function($scope, $route, $location, Drops) {
   console.log("DropsCtrl---------------");
 
   $scope.users = Drops.query();
   $scope.recovery = function(_id) {
     Drops.delete({_id: _id}, function() {
-      $route.reload();
+      $location.url('/');
     });
   };
 });

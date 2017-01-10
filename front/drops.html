@@ -4,12 +4,14 @@
     <th>No</th>
     <th>氏名</th>
     <th>年齢</th>
+    <th>Email</th>
     <th></th>
   </tr>
   <tr ng-repeat="user in users">
     <td>{{$index+1}}</td>
     <td>{{user.name}}</td>
     <td>{{user.age}}</td>
+    <td>{{user.email}}</td>
     <td>
       <button ng-click="recovery(user._id)">復元</button>
     </td>

@@ -1,5 +1,26 @@
 <h1>Add user</h1>
-氏名 <input ng-model="user.name"><br>
-年齢 <input ng-model="user.age"><br>
-<button ng-click="edit2()">登録</button>
+
+<form name="editForm" novalidate>
+    <lavel>氏名</lavel>
+    <input name="inputName" ng-model="user.name" required><br>
+    <div role="alert">
+      <span class="text-danger" ng-show="editForm.inputName.$error.required">
+        必須項目です!</span>
+    </div>
+    <lavel>年齢</lavel>
+    <input name="inputAge" ng-model="user.age" required><br>
+    <div role="alert">
+      <span class="text-danger" ng-show="editForm.inputAge.$error.required">
+        必須項目です!</span>
+    </div>
+    <lavel>Email</lavel>
+    <input type="email" name="inputEmail" ng-model="user.email" required><br>
+    <div role="alert">
+      <span class="text-danger" ng-show="editForm.inputEmail.$error.required">
+        必須項目です!</span>
+      <span class="text-danger" ng-show="editForm.inputEmail.$error.email">
+        正しいメールアドレスを入力して下さい</span>
+    </div>
+    <button ng-click="edit2()">登録</button>
+</form>
 <a ng-href="/#/users">戻る</a>
