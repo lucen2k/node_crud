@@ -1,19 +1,18 @@
-<h1>User list</h1>
+<h1>Drops</h1>
 <table border="1">
   <tr>
     <th>No</th>
     <th>氏名</th>
     <th>年齢</th>
-    <th><a ng-href="#/users/new">新規</a></th>
+    <th></th>
   </tr>
   <tr ng-repeat="user in users">
     <td>{{$index+1}}</td>
     <td>{{user.name}}</td>
     <td>{{user.age}}</td>
     <td>
-      <a ng-href="#/users/{{user._id}}">編集</a>
-      <button ng-click="delete(user._id)">削除</button>
+      <button ng-click="recovery(user._id)">復元</button>
     </td>
   </tr>
 </table>
-<a ng-href="#/drops">Drops</a>
+<a ng-href="#/users">User list</a>
